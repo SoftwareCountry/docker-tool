@@ -42,9 +42,12 @@
     <Content Include="Parameters\Application1.txt" />
     <Content Include="Parameters\Application2.txt" />
     <Content Include="Profiles.cmd" />
+    <Content Include="Profiles\PowerShell\Dockerfile" />
+    <Content Include="Profiles\WebServer\Dockerfile" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dockerfiles\" />
+    <Folder Include="Profiles\PowerShell\" />
     <Folder Include="Profiles\WebServer\" />
     <Folder Include="Release\" />
     <Folder Include="Profiles\" />
