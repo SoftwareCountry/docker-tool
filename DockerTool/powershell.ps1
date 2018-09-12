@@ -7,7 +7,6 @@ $imageid = docker images --format "{{.ID}}"
 docker images --format "table {{.Repository}}\t{{.ID}}"
 "_________________________________________"
 $dockerimage = @()
-$p = "|"
 while($imagename -notlike "exit") {
 	$imagename = Read-Host("Please enter image name or image id")
 	$imagerep | %	{
@@ -42,7 +41,7 @@ while($containername -notlike "exit") {
 docker start $containername
 $version = docker exec $containername cat /etc/issue.net
 $version1 = docker exec $containername cat /etc/redhat-release
-$version2 = docker exec $containername cat /etc/issue
+#$version2 = docker exec $containername cat /etc/issue
 if ($version -match "Ubuntu"){
 	$version = $version.Remove(12)
 }
@@ -61,7 +60,7 @@ if ($version1 -match "Red Hat"){
 if ($version1 -match "Fedora"){
 	$version = "Fedora"
 }
-if ($version2 -match "Arch Linux"){
+<#if ($version2 -match "Arch Linux"){
 	$version = "Arch Linux"
 }
 if ($version2 -match "Kali"){
@@ -69,7 +68,7 @@ if ($version2 -match "Kali"){
 }
 if ($version2 -match "Raspbian"){
 	$version = "Raspbian"
-}
+}#>
 switch ($version){
 	"Ubuntu 16.04" {
 		docker exec $containername apt update
@@ -81,6 +80,12 @@ switch ($version){
 		docker exec $containername cp prod.list ../etc/apt/sources.list.d/microsoft.list
 		docker exec $containername sudo apt-get update
 		docker exec $containername sudo apt-get install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	"Ubuntu 14.04" {
 		docker exec $containername apt update
@@ -92,6 +97,12 @@ switch ($version){
 		docker exec $containername cp prod.list ../etc/apt/sources.list.d/microsoft.list
 		docker exec $containername sudo apt-get update
 		docker exec $containername sudo apt-get install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	"Ubuntu 18.04" {
 		docker exec $containername apt update
@@ -102,6 +113,12 @@ switch ($version){
 		docker exec $containername sudo curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/ubuntu/18.04/prod.list
 		docker exec $containername sudo apt-get update
 		docker exec $containername sudo apt-get install -y powershell-preview
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh-preview
+____________________________________________________________"
 		# Start PowerShell with command pwsh-preview
 	}
 	"Debian 9" {
@@ -112,6 +129,13 @@ switch ($version){
 		docker exec $containername sudo curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/debian/9/prod.list
 		docker exec $containername sudo apt-get update
 		docker exec $containername sudo apt-get install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
+
 	}
 	"Debian 8" {
 		docker exec $containername apt-get update
@@ -121,12 +145,24 @@ switch ($version){
 		docker exec $containername sudo curl -o /etc/apt/sources.list.d/microsoft.list https://packages.microsoft.com/config/debian/8/prod.list
 		docker exec $containername sudo apt-get update
 		docker exec $containername sudo apt-get install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	"CentOS" {
 		docker exec $containername yum update -y
 		docker exec $containername yum install -y apt-utils ca-certificates curl apt-transport-https sudo wget
 		docker exec $containername sudo curl -o /etc/yum.repos.d/microsoft.repo https://packages.microsoft.com/config/rhel/7/prod.repo
 		docker exec $containername sudo yum install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	#need to register	
 	<#"Red Hat"{
@@ -143,6 +179,12 @@ switch ($version){
 		docker exec $containername zypper ar https://packages.microsoft.com/rhel/7/prod/ rep
 		docker exec $containername sudo zypper update -y
 		docker exec $containername sudo zypper install powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	"Fedora"{
 		docker exec $containername dnf install -y sudo
@@ -151,6 +193,12 @@ switch ($version){
 		docker exec $containername sudo dnf update -y
 		docker exec $containername sudo dnf install -y compat-openssl10
 		docker exec $containername sudo dnf install -y powershell
+		docker exec $containername echo "
+____________________________________________________________
+		        Attention!!!
+____________________________________________________________
+     To run powershell, you must type pwsh
+____________________________________________________________"
 	}
 	#with root can't do anything
 	<#"Arch Linux"{
@@ -158,13 +206,13 @@ switch ($version){
 		docker exec $containername pacman -S -y sudo
 		docker exec $containername
 		docker exec $containername
-	}#>
+
 	<#"Kali"{
 		docker exec $containername apt-get install -y curl gnupg apt-transport-https sudo wget
 		docker exec $containername
 		docker exec $containername
 		docker exec $containername
-	}#>
+
 	#cant start Powershell
 	"Raspbian"{
 		docker exec $containername apt-get update
@@ -173,13 +221,16 @@ switch ($version){
 		docker exec $containername mkdir ~/powershell
 		docker exec $containername tar -xvf ./powershell-6.0.3-linux-arm32.tar.gz -C ~/powershell
 		# Start PowerShell with command ~/powershell/pwsh
-	}
+	}	}#>
 	default {
 		"_________________________________________"
 		"Your version of Linux distribution does not support powershell"
 		"_________________________________________"
 	}
 }
+
+
+
 
 
 #$exec = docker exec -it $containername /bin/bash apt update apt install apt-utils ca-certificates curl apt-transport-https sudo curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
