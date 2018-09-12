@@ -64,6 +64,12 @@ if ($version1 -match "Fedora"){
 if ($version2 -match "Arch Linux"){
 	$version = "Arch Linux"
 }
+if ($version2 -match "Kali"){
+	$version = "Kali"
+}
+if ($version2 -match "Raspbian"){
+	$version = "Raspbian"
+}
 switch ($version){
 	"Ubuntu 16.04" {
 		docker exec $containername apt update
@@ -129,11 +135,6 @@ switch ($version){
 		docker exec $conatinername
 		docker exec $containername
 	}#>
-	"Ubuntu 12.04" {
-		"_________________________________________"
-		"Your version of ubuntu does not support powershell"
-		"_________________________________________"
-	}
 
 	#Of the two proposed solutions, you need to automatically select the second(?)
 	"OpenSUSE"{
@@ -152,11 +153,31 @@ switch ($version){
 		docker exec $containername sudo dnf install -y powershell
 	}
 	#with root can't do anything
-	"Arch Linux"{
+	<#"Arch Linux"{
 		docker exec $containername pacman -Sy
 		docker exec $containername pacman -S -y sudo
 		docker exec $containername
 		docker exec $containername
+	}#>
+	<#"Kali"{
+		docker exec $containername apt-get install -y curl gnupg apt-transport-https sudo wget
+		docker exec $containername
+		docker exec $containername
+		docker exec $containername
+	}#>
+	#cant start Powershell
+	"Raspbian"{
+		docker exec $containername apt-get update
+		docker exec $containername apt-get install -y curl gnupg apt-transport-https sudo wget
+		docker exec $containername wget https://github.com/PowerShell/PowerShell/releases/download/v6.0.3/powershell-6.0.3-linux-arm32.tar.gz
+		docker exec $containername mkdir ~/powershell
+		docker exec $containername tar -xvf ./powershell-6.0.3-linux-arm32.tar.gz -C ~/powershell
+		# Start PowerShell with command ~/powershell/pwsh
+	}
+	default {
+		"_________________________________________"
+		"Your version of Linux distribution does not support powershell"
+		"_________________________________________"
 	}
 }
 
