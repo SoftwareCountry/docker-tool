@@ -33,6 +33,7 @@
     <Compile Include="docker-compose.ps1" />
     <Compile Include="Doubleprofile.ps1" />
     <Compile Include="ParamProfile.ps1" />
+    <Compile Include="powershell.ps1" />
     <Compile Include="Profiles.ps1" />
   </ItemGroup>
   <ItemGroup>
