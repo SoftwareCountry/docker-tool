@@ -27,26 +27,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="buildimage.ps1" />
-    <Compile Include="Copy.ps1" />
-    <Compile Include="createDockerFilehistory.ps1" />
-    <Compile Include="createDockerFilejson.ps1" />
     <Compile Include="docker-compose.ps1" />
-    <Compile Include="Doubleprofile.ps1" />
-    <Compile Include="ParamProfile.ps1" />
-    <Compile Include="Profiles.ps1" />
-    <Compile Include="PwshContainer.ps1" />
-    <Compile Include="PwshImage.ps1" />
+    <Compile Include="Import-Modules.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Copy.cmd" />
-    <Content Include="createDockerFile.cmd" />
-    <Content Include="Doubleprofile.cmd" />
     <Content Include="Parameters\Application1.txt" />
     <Content Include="Parameters\Application2.txt" />
-    <Content Include="Profiles.cmd" />
     <Content Include="Profiles\PowerShell\Dockerfile" />
     <Content Include="Profiles\WebServer\Dockerfile" />
+    <Content Include="Modules\Get-Docker-FileHistory\Get-Docker-FileHistory.psm1" />
+    <Content Include="Modules\Get-Docker-FileJson\Get-Docker-FileJson.psm1" />
+    <Content Include="Modules\Get-Docker-FileParam\Get-Docker-FileParam.psm1" />
+    <Content Include="Modules\Install-Docker-PWSH\Install-Docker-PWSH.psm1" />
+    <Content Include="Modules\Merge-Docker-File\Merge-Docker-File.psm1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dockerfiles\" />
@@ -55,6 +48,12 @@
     <Folder Include="Release\" />
     <Folder Include="Profiles\" />
     <Folder Include="Parameters\" />
+    <Folder Include="Modules\" />
+    <Folder Include="Modules\Get-Docker-FileHistory\" />
+    <Folder Include="Modules\Get-Docker-FileJson\" />
+    <Folder Include="Modules\Get-Docker-FileParam\" />
+    <Folder Include="Modules\Install-Docker-PWSH\" />
+    <Folder Include="Modules\Merge-Docker-File\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="Build" />

@@ -1,1 +1,0 @@
-PowerShell .\copy.ps1
