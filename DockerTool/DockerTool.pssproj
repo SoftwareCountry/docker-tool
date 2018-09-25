@@ -28,7 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="docker-compose.ps1" />
-    <Compile Include="Import-Modules.ps1" />
+    <Compile Include="Import-DockerTool-Modules.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Parameters\Application1.txt" />
