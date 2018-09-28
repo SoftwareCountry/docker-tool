@@ -6,13 +6,12 @@ param(
 	[ValidateNotNullOrEmpty()]
 	[string]$image,
 
-	[Parameter(Mandatory=$True)]
+	[Parameter(Mandatory=$False)]
 	[ValidateNotNullOrEmpty()]
 	[string]$destination,
 	
 	[Parameter(Mandatory=$False)]
 	[switch]$json
-
 )
 	$history = docker history $image
 	if(-not($json))
@@ -137,7 +136,13 @@ param(
 		}
 		$newdockerfile = $newdockerfile -split "@@@" 
 		$newdockerfile = $newdockerfile -replace ("\\\\", "\")
-		$newdockerfile | Out-File $destination\dockerfile -Encoding utf8
 	}
-	$newdockerfile | Out-File $destination\dockerfile -Encoding utf8
+	if(-not ([string]::IsNullOrEmpty($Destination))){
+		$newdockerfile | Out-File $Destination\dockerfile -Encoding utf8
+	}
+	if([string]::IsNullOrEmpty($Destination)){
+		$location = Get-Location
+		$location = $location.Path
+		$newdockerfile | Out-File $location\dockerfile -Encoding utf8
+		}
 }
