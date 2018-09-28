@@ -27,7 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="docker-compose.ps1" />
     <Compile Include="Import-DockerTool-Modules.ps1" />
   </ItemGroup>
   <ItemGroup>
@@ -35,8 +34,8 @@
     <Content Include="Parameters\Application2.txt" />
     <Content Include="Profiles\PowerShell\Dockerfile" />
     <Content Include="Profiles\WebServer\Dockerfile" />
-    <Content Include="Modules\Get-Docker-FileHistory\Get-Docker-FileHistory.psm1" />
-    <Content Include="Modules\Get-Docker-FileJson\Get-Docker-FileJson.psm1" />
+    <Content Include="Modules\Get-Docker-Compose\Get-Docker-Compose.psm1" />
+    <Content Include="Modules\Get-Docker-File\Get-Docker-File.psm1" />
     <Content Include="Modules\Get-Docker-FileParam\Get-Docker-FileParam.psm1" />
     <Content Include="Modules\Install-Docker-PWSH\Install-Docker-PWSH.psm1" />
     <Content Include="Modules\Merge-Docker-File\Merge-Docker-File.psm1" />
@@ -49,8 +48,8 @@
     <Folder Include="Profiles\" />
     <Folder Include="Parameters\" />
     <Folder Include="Modules\" />
-    <Folder Include="Modules\Get-Docker-FileHistory\" />
-    <Folder Include="Modules\Get-Docker-FileJson\" />
+    <Folder Include="Modules\Get-Docker-Compose\" />
+    <Folder Include="Modules\Get-Docker-File\" />
     <Folder Include="Modules\Get-Docker-FileParam\" />
     <Folder Include="Modules\Install-Docker-PWSH\" />
     <Folder Include="Modules\Merge-Docker-File\" />
