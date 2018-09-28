@@ -11,13 +11,11 @@ param(
 	[string]$destination,
 	
 	[Parameter(Mandatory=$False)]
-	[AllowEmptyString()]
-	[AllowNull()]
-	[string]$json
+	[switch]$json
 
 )
 	$history = docker history $image
-	if([string]::IsNullOrEmpty($json))
+	if(-not($json))
 	{
 		Write-Host ("Creating a dockerfile using the docker history...")
 		for ($i =1; $i -lt $history.Length; $i++){
@@ -93,7 +91,7 @@ param(
 			}
 		}
 	}
-	if(-not ([string]::IsNullOrEmpty($json)))
+	if($json)
 	{
 		Write-Host ("Creating a dockerfile using json...")
 		$dockercount= $history.Length
